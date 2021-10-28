@@ -580,6 +580,29 @@ private:
 			if (_betting_tickets.at(index).race_type.type != RaceType::Type::None) {
 				text += _betting_tickets.at(index).race_type.to_string();
 				text += L", ";
+				switch (_betting_tickets.at(index).race_type.type) {
+				case RaceType::Type::Win:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Place:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Quinella:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					text += _betting_tickets.at(index).horses_name.back().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Exacta:
+					text += _betting_tickets.at(index).horse_name_exacta_winner.to_string();
+					text += L", ";
+					text += _betting_tickets.at(index).horse_name_exacta_runner_up.to_string();
+					text += L", ";
+
+					break;
+				}
 				text += Format(L"￥{}"_fmt, _betting_tickets.at(index).betting_handle);
 			}
 			ui.gui_betting.text(Format(L"listbox_row_betting_ticket_{}"_fmt, row)).text = text;
@@ -646,6 +669,29 @@ private:
 			if (_betting_tickets.at(index).race_type.type != RaceType::Type::None) {
 				text += _betting_tickets.at(index).race_type.to_string();
 				text += L", ";
+				switch (_betting_tickets.at(index).race_type.type) {
+				case RaceType::Type::Win:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Place:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Quinella:
+					text += _betting_tickets.at(index).horses_name.front().to_string();
+					text += L", ";
+					text += _betting_tickets.at(index).horses_name.back().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Exacta:
+					text += _betting_tickets.at(index).horse_name_exacta_winner.to_string();
+					text += L", ";
+					text += _betting_tickets.at(index).horse_name_exacta_runner_up.to_string();
+					text += L", ";
+
+					break;
+				}
 				text += Format(L"￥{}"_fmt, _betting_tickets.at(index).betting_handle);
 			}
 			ui.gui_betting.text(Format(L"listbox_row_betting_ticket_{}"_fmt, row)).text = text;
@@ -660,10 +706,33 @@ private:
 		if (_betting_tickets.at(index).race_type.type != RaceType::Type::None) {
 			text += _betting_tickets.at(index).race_type.to_string();
 			text += L", ";
+			switch (_betting_tickets.at(index).race_type.type) {
+			case RaceType::Type::Win:
+				text += _betting_tickets.at(index).horses_name.front().to_string();
+				text += L", ";
+				break;
+			case RaceType::Type::Place:
+				text += _betting_tickets.at(index).horses_name.front().to_string();
+				text += L", ";
+				break;
+			case RaceType::Type::Quinella:
+				text += _betting_tickets.at(index).horses_name.front().to_string();
+				text += L", ";
+				text += _betting_tickets.at(index).horses_name.back().to_string();
+				text += L", ";
+				break;
+			case RaceType::Type::Exacta:
+				text += _betting_tickets.at(index).horse_name_exacta_winner.to_string();
+				text += L", ";
+				text += _betting_tickets.at(index).horse_name_exacta_runner_up.to_string();
+				text += L", ";
+
+				break;
+			}
 			text += Format(L"￥{}"_fmt, _betting_tickets.at(index).betting_handle);
 		}
 		ui.gui_betting.text(Format(L"listbox_row_betting_ticket_{}"_fmt, row)).text = text;
-		if (_write_ini_odds_win(_odds_win(ui))) {
+		if (_write_ini_odds_win(_odds_win())) {
 			ui.snackbar.show(L"./runs/odds_win.iniの書き込みに成功しました :)", SnackBar::Flag::Information);
 		}
 		else {
@@ -760,19 +829,42 @@ private:
 			if (_betting_tickets.at(_n_betting_tickets).race_type.type != RaceType::Type::None) {
 				text += _betting_tickets.at(_n_betting_tickets).race_type.to_string();
 				text += L", ";
+				switch (_betting_tickets.at(_n_betting_tickets).race_type.type) {
+				case RaceType::Type::Win:
+					text += _betting_tickets.at(_n_betting_tickets).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Place:
+					text += _betting_tickets.at(_n_betting_tickets).horses_name.front().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Quinella:
+					text += _betting_tickets.at(_n_betting_tickets).horses_name.front().to_string();
+					text += L", ";
+					text += _betting_tickets.at(_n_betting_tickets).horses_name.back().to_string();
+					text += L", ";
+					break;
+				case RaceType::Type::Exacta:
+					text += _betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.to_string();
+					text += L", ";
+					text += _betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.to_string();
+					text += L", ";
+
+					break;
+				}
 				text += Format(L"￥{}"_fmt, _betting_tickets.at(_n_betting_tickets).betting_handle);
 			}
 			ui.gui_betting.text(Format(L"listbox_row_betting_ticket_{}"_fmt, row)).text = text;
 		}
 		_n_betting_tickets++;
-		if (_write_ini_odds_win(_odds_win(ui))) {
+		if (_write_ini_odds_win(_odds_win())) {
 			ui.snackbar.show(L"./runs/odds_win.iniの書き込みに成功しました :)", SnackBar::Flag::Information);
 		}
 		else {
 			ui.snackbar.show(L"./runs/odds_win.iniの書き込みに失敗しました :(", SnackBar::Flag::Error);
 		}
 		if (_foolproof_official(ui)) {
-			if (_write_ini_odds_last(_odds_last(ui))) {
+			if (_write_ini_odds_last(_odds_last())) {
 				ui.snackbar.show(L"./runs/odds_last.iniの書き込みの成功しました :)", SnackBar::Flag::Information);
 			}
 			else {
@@ -808,7 +900,7 @@ private:
 				break;
 			}
 		}
-		if (_write_ini_odds_last(_odds_last(ui))) {
+		if (_write_ini_odds_last(_odds_last())) {
 			ui.snackbar.show(L"./runs/odds_last.iniの書き込みに成功しました :)", SnackBar::Flag::Information);
 		}
 		else {
@@ -928,7 +1020,7 @@ private:
 	}
 
 private:
-	Array<OddsWin> _odds_win(UI& ui) {
+	Array<OddsWin> _odds_win() {
 		Array<OddsWin> odds_win(5);
 		odds_win.at(0).result.name = HorseName::Name::A;
 		odds_win.at(1).result.name = HorseName::Name::B;
@@ -997,7 +1089,7 @@ private:
 	}
 
 private:
-	OddsLast _odds_last(UI& ui) {
+	OddsLast _odds_last() {
 		OddsLast odds_last;
 		odds_last.odds_win.result.name = _results.front().name;
 		for (int32 order_of_finish = 0; order_of_finish < 3; order_of_finish++) {
@@ -1135,11 +1227,17 @@ void Main() {
 	Window::SetTitle(L"5I Horse Race Manager");
 	Graphics::SetBackground(Color(51));
 	ScreenCapture::EnableScreenshot(false);
-	Window::SetFullscreen(true, Size(1920, 1080));
+	System::SetExitEvent(WindowEvent::Manual);
+	Window::SetStyle(WindowStyle::Sizeable);
+	Window::Maximize();
+	System::Update();
 	FontManager::Register(L"/64608");
 	UI ui;
 	Backend backend(ui);
 	while (System::Update()) {
+		if (!Window::GetState().maximized) {
+			Window::Maximize();
+		}
 		backend.update(ui);
 		ui.update();
 		ui.draw();
