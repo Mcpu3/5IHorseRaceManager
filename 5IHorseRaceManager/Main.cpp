@@ -1235,7 +1235,7 @@ void Main() {
 	UI ui;
 	Backend backend(ui);
 	while (System::Update()) {
-		if (!Window::GetState().maximized) {
+		if (!Window::Maximized()) {
 			Window::Maximize();
 		}
 		backend.update(ui);
