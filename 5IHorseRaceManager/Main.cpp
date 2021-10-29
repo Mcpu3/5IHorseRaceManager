@@ -53,11 +53,11 @@ public:
 class HorseName {
 public:
 	enum class Name {
-		A,
-		B,
-		C,
-		D,
-		E,
+		Horse,
+		Dog,
+		Rabbit,
+		Tiger,
+		Giraffe,
 		None
 	};
 
@@ -77,16 +77,16 @@ public:
 public:
 	String to_string() const {
 		switch (name) {
-		case Name::A:
-			return L"A";
-		case Name::B:
-			return L"B";
-		case Name::C:
-			return L"C";
-		case Name::D:
-			return L"D";
-		case Name::E:
-			return L"E";
+		case Name::Horse:
+			return L"おうまさん";
+		case Name::Dog:
+			return L"わんこちゃん";
+		case Name::Rabbit:
+			return L"うさぎちゃん";
+		case Name::Tiger:
+			return L"虎";
+		case Name::Giraffe:
+			return L"きりんさん";
 		}
 		return L"";
 	}
@@ -616,21 +616,21 @@ private:
 		ui.gui_add.radioButton(L"race_type").setName(2, RaceType(RaceType::Type::Quinella).to_string());
 		ui.gui_add.radioButton(L"race_type").setName(3, RaceType(RaceType::Type::Exacta).to_string());
 		ui.gui_add.radioButton(L"race_type").check(0);
-		ui.gui_add.checkBox(L"horses_name").setName(0, HorseName(HorseName::Name::A).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(0, HorseName(HorseName::Name::A).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(0, HorseName(HorseName::Name::A).to_string());
-		ui.gui_add.checkBox(L"horses_name").setName(1, HorseName(HorseName::Name::B).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(1, HorseName(HorseName::Name::B).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(1, HorseName(HorseName::Name::B).to_string());
-		ui.gui_add.checkBox(L"horses_name").setName(2, HorseName(HorseName::Name::C).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(2, HorseName(HorseName::Name::C).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(2, HorseName(HorseName::Name::C).to_string());
-		ui.gui_add.checkBox(L"horses_name").setName(3, HorseName(HorseName::Name::D).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(3, HorseName(HorseName::Name::D).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(3, HorseName(HorseName::Name::D).to_string());
-		ui.gui_add.checkBox(L"horses_name").setName(4, HorseName(HorseName::Name::E).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(4, HorseName(HorseName::Name::E).to_string());
-		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(4, HorseName(HorseName::Name::E).to_string());
+		ui.gui_add.checkBox(L"horses_name").setName(0, HorseName(HorseName::Name::Horse).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(0, HorseName(HorseName::Name::Horse).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(0, HorseName(HorseName::Name::Horse).to_string());
+		ui.gui_add.checkBox(L"horses_name").setName(1, HorseName(HorseName::Name::Dog).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(1, HorseName(HorseName::Name::Dog).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(1, HorseName(HorseName::Name::Dog).to_string());
+		ui.gui_add.checkBox(L"horses_name").setName(2, HorseName(HorseName::Name::Rabbit).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(2, HorseName(HorseName::Name::Rabbit).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(2, HorseName(HorseName::Name::Rabbit).to_string());
+		ui.gui_add.checkBox(L"horses_name").setName(3, HorseName(HorseName::Name::Tiger).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(3, HorseName(HorseName::Name::Tiger).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(3, HorseName(HorseName::Name::Tiger).to_string());
+		ui.gui_add.checkBox(L"horses_name").setName(4, HorseName(HorseName::Name::Giraffe).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_winner").setName(4, HorseName(HorseName::Name::Giraffe).to_string());
+		ui.gui_add.radioButton(L"horse_name_exacta_runner_up").setName(4, HorseName(HorseName::Name::Giraffe).to_string());
 		for (uint32 index = 0; index < ui.gui_add.checkBox(L"horses_name").num_items; index++) {
 			ui.gui_add.checkBox(L"horses_name").check(index, false);
 		}
@@ -644,11 +644,11 @@ private:
 		_results.clear();
 		_results.resize(5);
 		for (uint32 order_of_finish = 0; order_of_finish < 5; order_of_finish++) {
-			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(0, HorseName(HorseName::Name::A).to_string());
-			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(1, HorseName(HorseName::Name::B).to_string());
-			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(2, HorseName(HorseName::Name::C).to_string());
-			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(3, HorseName(HorseName::Name::D).to_string());
-			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(4, HorseName(HorseName::Name::E).to_string());
+			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(0, HorseName(HorseName::Name::Horse).to_string());
+			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(1, HorseName(HorseName::Name::Dog).to_string());
+			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(2, HorseName(HorseName::Name::Rabbit).to_string());
+			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(3, HorseName(HorseName::Name::Tiger).to_string());
+			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).setName(4, HorseName(HorseName::Name::Giraffe).to_string());
 			ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).check(none);
 		}
 	}
@@ -767,19 +767,19 @@ private:
 			HorseName horse_name;
 			switch (ui.gui_add.checkBox(L"horses_name").checkedItems.at(index)) {
 			case 0:
-				horse_name.name = HorseName::Name::A;
+				horse_name.name = HorseName::Name::Horse;
 				break;
 			case 1:
-				horse_name.name = HorseName::Name::B;
+				horse_name.name = HorseName::Name::Dog;
 				break;
 			case 2:
-				horse_name.name = HorseName::Name::C;
+				horse_name.name = HorseName::Name::Rabbit;
 				break;
 			case 3:
-				horse_name.name = HorseName::Name::D;
+				horse_name.name = HorseName::Name::Tiger;
 				break;
 			case 4:
-				horse_name.name = HorseName::Name::E;
+				horse_name.name = HorseName::Name::Giraffe;
 				break;
 			}
 			_betting_tickets.at(_n_betting_tickets).horses_name.push_back(horse_name);
@@ -787,38 +787,38 @@ private:
 		if (ui.gui_add.radioButton(L"horse_name_exacta_winner").checkedItem.has_value()) {
 			switch (ui.gui_add.radioButton(L"horse_name_exacta_winner").checkedItem.value()) {
 			case 0:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::A;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::Horse;
 				break;
 			case 1:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::B;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::Dog;
 				break;
 			case 2:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::C;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::Rabbit;
 				break;
 			case 3:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::D;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::Tiger;
 				break;
 			case 4:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::E;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_winner.name = HorseName::Name::Giraffe;
 				break;
 			}
 		}
 		if (ui.gui_add.radioButton(L"horse_name_exacta_runner_up").checkedItem.has_value()) {
 			switch (ui.gui_add.radioButton(L"horse_name_exacta_runner_up").checkedItem.value()) {
 			case 0:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::A;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::Horse;
 				break;
 			case 1:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::B;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::Dog;
 				break;
 			case 2:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::C;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::Rabbit;
 				break;
 			case 3:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::D;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::Tiger;
 				break;
 			case 4:
-				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::E;
+				_betting_tickets.at(_n_betting_tickets).horse_name_exacta_runner_up.name = HorseName::Name::Giraffe;
 				break;
 			}
 		}
@@ -884,19 +884,19 @@ private:
 		for (uint32 order_of_finish = 0; order_of_finish < 5; order_of_finish++) {
 			switch (ui.gui_official.radioButton(Format(L"horse_name_{}"_fmt, order_of_finish)).checkedItem.value()) {
 			case 0:
-				_results.at(order_of_finish).name = HorseName::Name::A;
+				_results.at(order_of_finish).name = HorseName::Name::Horse;
 				break;
 			case 1:
-				_results.at(order_of_finish).name = HorseName::Name::B;
+				_results.at(order_of_finish).name = HorseName::Name::Dog;
 				break;
 			case 2:
-				_results.at(order_of_finish).name = HorseName::Name::C;
+				_results.at(order_of_finish).name = HorseName::Name::Rabbit;
 				break;
 			case 3:
-				_results.at(order_of_finish).name = HorseName::Name::D;
+				_results.at(order_of_finish).name = HorseName::Name::Tiger;
 				break;
 			case 4:
-				_results.at(order_of_finish).name = HorseName::Name::E;
+				_results.at(order_of_finish).name = HorseName::Name::Giraffe;
 				break;
 			}
 		}
@@ -1022,30 +1022,30 @@ private:
 private:
 	Array<OddsWin> _odds_win() {
 		Array<OddsWin> odds_win(5);
-		odds_win.at(0).result.name = HorseName::Name::A;
-		odds_win.at(1).result.name = HorseName::Name::B;
-		odds_win.at(2).result.name = HorseName::Name::C;
-		odds_win.at(3).result.name = HorseName::Name::D;
-		odds_win.at(4).result.name = HorseName::Name::E;
+		odds_win.at(0).result.name = HorseName::Name::Horse;
+		odds_win.at(1).result.name = HorseName::Name::Dog;
+		odds_win.at(2).result.name = HorseName::Name::Rabbit;
+		odds_win.at(3).result.name = HorseName::Name::Tiger;
+		odds_win.at(4).result.name = HorseName::Name::Giraffe;
 		double S = 0.0;
 		Array<double> S_i(5);
 		for (int32 index = 0; index < _n_betting_tickets; index++) {
 			if (_betting_tickets.at(index).race_type.type == RaceType::Type::Win) {
 				S += _betting_tickets.at(index).betting_handle;
 				switch (_betting_tickets.at(index).horses_name.front().name) {
-				case HorseName::Name::A:
+				case HorseName::Name::Horse:
 					S_i.at(0) += _betting_tickets.at(index).betting_handle;
 					break;
-				case HorseName::Name::B:
+				case HorseName::Name::Dog:
 					S_i.at(1) += _betting_tickets.at(index).betting_handle;
 					break;
-				case HorseName::Name::C:
+				case HorseName::Name::Rabbit:
 					S_i.at(2) += _betting_tickets.at(index).betting_handle;
 					break;
-				case HorseName::Name::D:
+				case HorseName::Name::Tiger:
 					S_i.at(3) += _betting_tickets.at(index).betting_handle;
 					break;
-				case HorseName::Name::E:
+				case HorseName::Name::Giraffe:
 					S_i.at(4) += _betting_tickets.at(index).betting_handle;
 					break;
 				}
