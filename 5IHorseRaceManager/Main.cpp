@@ -525,7 +525,9 @@ public:
 		}
 		for (int32 row = 0; row < ui.betting_listbox_rows_max; row++) {
 			if (ui.gui_betting.button(Format(L"listbox_delete_{}"_fmt, row)).pushed) {
-				_update_betting_listbox_button_delete(ui, row);
+				if (MessageBox::Show(L"削除しますか?", MessageBoxStyle::YesNo) == MessageBoxCommand::Yes) {
+					_update_betting_listbox_button_delete(ui, row);
+				}
 			}
 		}
 		if (ui.gui_betting.button(L"listbox_add").pushed) {
