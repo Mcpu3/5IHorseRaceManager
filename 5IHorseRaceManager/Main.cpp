@@ -423,10 +423,10 @@ public:
 		widget_style.font = Font(11, L"Rounded M+ 1m regular");
 		gui_betting.setTitle(L"勝馬投票");
 		gui_betting.add(L"listbox_arrow_up", GUIButton::Create(L"↓", false, widget_style));
-		gui_betting.add(L"listbox_n_pages_max_and_page_current", GUIText::Create(L"--/--", widget_style));
+		gui_betting.add(L"listbox_n_pages_max_and_page_current", GUIText::Create(L"---/---", widget_style));
 		gui_betting.addln(L"listbox_arrow_down", GUIButton::Create(L"↑", false, widget_style));
 		for (int32 row = 0; row < betting_listbox_rows_max; row++) {
-			gui_betting.add(Format(L"listbox_index_{}"_fmt, row), GUIText::Create(L"0", widget_style));
+			gui_betting.add(Format(L"listbox_index_{}"_fmt, row), GUIText::Create(Format(L"{:>4}"_fmt, 0), widget_style));
 			gui_betting.add(Format(L"listbox_delete_{}"_fmt, row), GUIButton::Create(L"削除", false, widget_style));
 			gui_betting.addln(Format(L"listbox_row_betting_ticket_{}"_fmt, row), GUIText::Create(L"", widget_style));
 		}
@@ -487,7 +487,7 @@ public:
 	Backend(UI& ui) :
 		_betting_tickets(),
 		_n_betting_tickets(0),
-		_n_betting_tickets_max(100),
+		_n_betting_tickets_max(1000),
 		_betting_handle_max(9900),
 		_listbox_page_current(0),
 		listbox_n_pages_max((_n_betting_tickets_max + ui.betting_listbox_rows_max - 1) / (ui.betting_listbox_rows_max)),
@@ -572,10 +572,10 @@ private:
 		_betting_tickets.resize(_n_betting_tickets_max);
 		_n_betting_tickets = 0;
 		_listbox_page_current = 0;
-		ui.gui_betting.text(L"listbox_n_pages_max_and_page_current").text = Format(L"{:>2}/{:>2}"_fmt, _listbox_page_current + 1, listbox_n_pages_max);
+		ui.gui_betting.text(L"listbox_n_pages_max_and_page_current").text = Format(L"{:>3}/{:>3}"_fmt, _listbox_page_current + 1, listbox_n_pages_max);
 		for (int32 row = 0; row < ui.betting_listbox_rows_max; row++) {
 			const int32 index = ui.betting_listbox_rows_max * _listbox_page_current + row;
-			ui.gui_betting.text(Format(L"listbox_index_{}"_fmt, row)).text = Format(L"{:>3}"_fmt, index + 1);
+			ui.gui_betting.text(Format(L"listbox_index_{}"_fmt, row)).text = Format(L"{:>4}"_fmt, index + 1);
 			String text;
 			if (_betting_tickets.at(index).race_type.type != RaceType::Type::None) {
 				text += _betting_tickets.at(index).race_type.to_string();
@@ -661,10 +661,10 @@ private:
 		else {
 			_listbox_page_current++;
 		}
-		ui.gui_betting.text(L"listbox_n_pages_max_and_page_current").text = Format(L"{:>2}/{:>2}"_fmt, _listbox_page_current + 1, listbox_n_pages_max);
+		ui.gui_betting.text(L"listbox_n_pages_max_and_page_current").text = Format(L"{:>3}/{:>3}"_fmt, _listbox_page_current + 1, listbox_n_pages_max);
 		for (int32 row = 0; row < ui.betting_listbox_rows_max; row++) {
 			const int32 index = ui.betting_listbox_rows_max * _listbox_page_current + row;
-			ui.gui_betting.text(Format(L"listbox_index_{}"_fmt, row)).text = Format(L"{:>3}"_fmt, index + 1);
+			ui.gui_betting.text(Format(L"listbox_index_{}"_fmt, row)).text = Format(L"{:>4}"_fmt, index + 1);
 			String text;
 			if (_betting_tickets.at(index).race_type.type != RaceType::Type::None) {
 				text += _betting_tickets.at(index).race_type.to_string();
@@ -936,7 +936,7 @@ private:
 				ui.gui_betting.button(Format(L"listbox_delete_{}"_fmt, row)).enabled = false;
 			}
 		}
-		if (_n_betting_tickets == _n_betting_tickets_max - 1) {
+		if (_n_betting_tickets == _n_betting_tickets_max) {
 			ui.gui_betting.button(L"listbox_add").enabled = false;
 		}
 		switch (ui.gui_add.radioButton(L"race_type").checkedItem.value()) {
